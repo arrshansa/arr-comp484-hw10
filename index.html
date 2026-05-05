@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Rocky the Eridian - Space Friend</title>
-    <meta name="description" content="A Giga Friend game featuring Rocky from Project Hail Mary">
+    <title>Rocky the Eridian - Space Friend (DevTools Demo)</title>
+    <meta name="description" content="A Giga Friend game featuring Rocky from Project Hail Mary — with Chrome DevTools demos for COMP 484 HW10">
     <link id="favicon" rel="icon" href="https://glitch.com/edit/favicon-app.ico" type="image/x-icon">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,26 +11,97 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <style>
+      /* ── DevTools Demo Panel ── */
+      .devtools-panel {
+        max-width: 600px;
+        margin: 28px auto 0;
+        background: rgba(10, 25, 41, 0.85);
+        border: 1px solid rgba(201, 117, 69, 0.4);
+        border-radius: 10px;
+        padding: 20px 24px 24px;
+        backdrop-filter: blur(8px);
+        box-shadow: 0 4px 28px rgba(0,0,0,0.5);
+      }
+      .devtools-panel h2 {
+        color: #c97545;
+        margin: 0 0 4px 0;
+        font-size: 16px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        border-bottom: 1px solid rgba(201,117,69,0.3);
+        padding-bottom: 8px;
+      }
+      .devtools-panel .panel-note {
+        font-size: 12px;
+        color: #8a96a5;
+        font-style: italic;
+        margin: 6px 0 14px;
+      }
+      .devtools-section {
+        margin-bottom: 16px;
+      }
+      .devtools-section h3 {
+        color: #7fa85a;
+        font-size: 13px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin: 0 0 8px 0;
+      }
+      .devtools-btn-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 7px;
+      }
+      .devtools-btn-grid button {
+        font-family: 'PT Serif', Georgia, serif;
+        font-size: 12px;
+        padding: 6px 12px;
+        background: #1a2b42;
+        border: 1px solid #2e4566;
+        color: #c5ccd4;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background 0.15s, border-color 0.15s, box-shadow 0.15s;
+      }
+      .devtools-btn-grid button:hover {
+        background: #243d5a;
+        border-color: #c8374d;
+        box-shadow: 0 0 10px rgba(200,55,77,0.35);
+        color: #e8dfd0;
+      }
+      .devtools-btn-grid button:active { transform: translateY(1px); }
+      .devtools-btn-grid button.green {
+        background: #2b4020;
+        border-color: #7fa85a;
+      }
+      .devtools-btn-grid button.green:hover {
+        background: #3b5a2c;
+        border-color: #a8cc7a;
+        box-shadow: 0 0 10px rgba(127,168,90,0.4);
+      }
+      code {
+        background: rgba(255,255,255,0.08);
+        padding: 1px 5px;
+        border-radius: 3px;
+        font-size: 11px;
+        color: #c97545;
+      }
+    </style>
   </head>
   <body>
     <header>
-      <h1>
-        Rocky: Your Eridian Partner
-      </h1>
-      <p class="subtitle">Friend from Planet Erid &mdash; keep him happy, question?</p>
+      <h1>Rocky: Your Eridian Partner</h1>
+      <p class="subtitle">Friend from Planet Erid &mdash; keep him happy, question? &nbsp;|&nbsp; <em>Chrome DevTools Demo — COMP 484 HW 10</em></p>
     </header>
 
     <main>
       <section class="Friend-image-container">
-        <!-- Speech bubble where Rocky's comments appear after each action -->
         <div class="speech-bubble" aria-live="polite">
           <span class="speech-text">Good, good! Friend, you here!</span>
         </div>
-
-        <!-- Rocky image (generated via Gemini, stored in images/ folder) -->
         <div class="rocky" aria-label="Rocky the Eridian">
           <img class="Friend-image" src="images/Rocky.png" alt="Rocky the Eridian">
-          <!-- Musical notes that float up when Rocky "speaks" -->
           <div class="note note-1">&#9835;</div>
           <div class="note note-2">&#9833;</div>
           <div class="note note-3">&#9839;</div>
@@ -42,33 +113,86 @@
         <div>Name: <strong><span class="name"></span></strong></div>
         <div>Weight: <strong><span class="weight"></span> kg</strong></div>
         <div>Happiness: <strong><span class="happiness"></span> musical notes (per min)</strong></div>
-        <!-- New stat tied to the new action button: Rocky's trust in you -->
         <div>Trust: <strong><span class="trust"></span> / 100</strong></div>
-
         <div class="button-container">
-          <button class="treat-button" title="Feed Rocky some ammonia-rich food">
-            Feed
-          </button>
-          <button class="play-button" title="Play a tune with Rocky">
-            Play
-          </button>
-          <button class="chat-button" title="Chat with Rocky">
-            Chat
-          </button>
-          <!-- NEW ACTION BUTTON: Science experiments (Rocky's favorite pastime) -->
-          <button class="science-button" title="Do science with fren Grace">
-            Science!
-          </button>
+          <button class="treat-button"   title="Feed Rocky">Feed</button>
+          <button class="play-button"    title="Play music">Play</button>
+          <button class="chat-button"    title="Chat">Chat</button>
+          <button class="science-button" title="Do science">Science!</button>
         </div>
       </section>
     </main>
 
-    <!-- jQuery must load before script.js because the script uses $ -->
+    <!-- ══════════════════════════════════════════════════════
+         CHROME DEVTOOLS DEMO PANEL
+         Open DevTools (F12) before clicking any button below.
+         ══════════════════════════════════════════════════════ -->
+    <section class="devtools-panel">
+      <h2>Chrome DevTools Demo Panel</h2>
+      <p class="panel-note">Open DevTools (F12 / Cmd+Option+I) and go to the Console tab before clicking. See devtools-demo.js for full code annotations.</p>
+
+      <!-- MESSAGE LOGGING -->
+      <div class="devtools-section">
+        <h3>Message Logging</h3>
+        <div class="devtools-btn-grid">
+          <button id="btn-log-info"   >Log Info</button>
+          <button id="btn-log-warn"   >Log Warning</button>
+          <button id="btn-log-error"  >Log Error</button>
+          <button id="btn-log-table"  >Log Table</button>
+          <button id="btn-log-group"  >Log Group</button>
+          <button id="btn-log-custom" >Log Custom</button>
+          <button id="btn-browser-msg">Browser Messages</button>
+        </div>
+      </div>
+
+      <!-- CAUSE ERRORS -->
+      <div class="devtools-section">
+        <h3>Cause Errors</h3>
+        <div class="devtools-btn-grid">
+          <button id="btn-404"      >Cause 404 Network Error</button>
+          <button id="btn-typeerror">Cause TypeError</button>
+          <button id="btn-violation">Cause Violation</button>
+        </div>
+      </div>
+
+      <!-- FILTER MESSAGES -->
+      <div class="devtools-section">
+        <h3>Filter Messages</h3>
+        <div class="devtools-btn-grid">
+          <button id="btn-filter">Run All Filter Demos</button>
+        </div>
+        <p class="panel-note" style="margin-top:6px;">
+          After clicking, filter in the Console bar:
+          type <code>FILTER-WARN</code> (text filter) &mdash;
+          enable regex and type <code>FILTER-(WARN|ERROR)</code> (regex filter) &mdash;
+          use level dropdown (log level filter) &mdash;
+          use Sidebar &rarr; "user messages" (source / user filter).
+        </p>
+      </div>
+
+      <!-- DEBUGGING -->
+      <div class="devtools-section">
+        <h3>Debugging &mdash; Sources UI &amp; Breakpoints</h3>
+        <div class="devtools-btn-grid">
+          <button id="btn-bug">Reproduce Bug</button>
+          <button id="btn-fix" class="green">Apply Fix</button>
+          <button id="btn-debug" class="green">Run Debuggable Action</button>
+        </div>
+        <p class="panel-note" style="margin-top:6px;">
+          For breakpoints: Sources tab &rarr; devtools-demo.js &rarr; click the line-number gutter on line 293,
+          then click "Run Debuggable Action". Inspect variables in the Scope pane, add Watch Expressions,
+          and use the live Console while paused.
+        </p>
+      </div>
+    </section>
+
     <script src="https://code.jquery.com/jquery-2.2.1.min.js"
             integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00="
             crossorigin="anonymous"></script>
-    <!-- Tone.js for musical note sound effects (Rocky communicates in music) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
+    <!-- Original project script — defines Friend_info, speechLines, helpers -->
     <script src="script.js"></script>
+    <!-- DevTools demo script — depends on script.js globals -->
+    <script src="devtools-demo.js"></script>
   </body>
 </html>
